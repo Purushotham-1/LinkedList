@@ -1,0 +1,76 @@
+import java.util.*;
+public class Linkedlist{
+    class Node{
+        int data;
+        Node next;
+        Node(int n){
+            this.data=n;
+            next=null;
+        }
+    }
+   static Node head,tail,newNode;
+    
+   Node insert(int n){
+        Node newNode=new Node(n);
+        if(head==null){
+            head=tail=newNode;
+        }
+        else{tail.next=newNode;
+        tail=newNode;}
+        return head;
+    }
+   static void display(){
+        Node temp=head;
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+        System.out.println();
+    }
+    
+    static void segrete(){
+        Node starteven=null;
+        Node endeven=null;
+        Node startodd=null;
+        Node endodd=null;
+        Node current=head;
+        while(current!=null){
+        if(current.data%2==0){
+            if(starteven==null){
+                starteven=current;
+                endeven=starteven;
+            }
+            else{
+                endeven.next=current;
+                endeven=current;
+            }
+        }
+        else{
+            if(startodd==null){
+                startodd=current;
+                endodd=startodd;
+            }
+            else{
+                endodd.next=current;
+                endodd=current;
+            }
+        }
+        current=current.next;
+    }
+    endeven.next=startodd;
+    endodd.next=null;
+    head=starteven;
+    }
+    public static void main(String[] args){
+        Linkedlist list=new Linkedlist();
+        list.insert(10);
+        list.insert(15);
+        list.insert(7);
+        list.insert(25);
+        list.insert(16);
+        list.insert(27);
+        list.display();
+        list.segrete();
+        list.display();
+    }
+}
