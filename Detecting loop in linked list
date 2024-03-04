@@ -1,0 +1,68 @@
+import java.util.*;
+public class Linkedlist{
+    class Node{
+        int data;
+        Node next;
+        Node(int n){
+            this.data=n;
+            next=null;
+        }
+    }
+  static Node head,tail,newNode;
+    
+  Node insert(int n){
+        Node newNode=new Node(n);
+        if(head==null){
+            head=tail=newNode;
+        }
+        else{tail.next=newNode;
+        tail=newNode;}
+        return head;
+    }
+  static void display(){
+        Node temp=head;
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+         System.out.println();
+    }
+    
+  static  boolean detectloop(){
+        Node fast=head;
+        Node slow=head;
+        while(fast!=null && fast.next!=null){
+            fast=fast.next.next;
+            slow=slow.next;
+            if(fast==slow){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+      static Node  detectlooputil(){
+        if(detectloop()){
+            System.out.println("Yes");
+        }
+        else{
+            System.out.println("No");
+        }
+        return head;
+    }
+    
+    
+    public static void main(String[] args){
+        Linkedlist list=new Linkedlist();
+        list.insert(10);
+        list.insert(15);
+        list.insert(7);
+        list.insert(25);
+        list.insert(16);
+        list.insert(27);
+        list.display();
+        list.detectlooputil();
+        tail.next=head.next;
+        list.detectlooputil();
+    }
+}
